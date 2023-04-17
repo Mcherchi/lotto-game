@@ -1,0 +1,11 @@
+{
+  "name": "lotto-game",
+  "version": "1.0.0",
+  "description": "This project simulates the game of lotto.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mattia Cherchi",
+  "license": "ISC"
+}
