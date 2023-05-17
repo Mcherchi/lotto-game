@@ -1,6 +1,6 @@
 const print = require("./View/print");
 const userInput = require("./Controller/userInputsController");
-const { LottoTicketController } = require("./Controller/LottoTicketController");
+const { LottoController } = require("./Controller/LottoController");
 
 // Define a function called `play` which will run the game
 const play = () => {
@@ -8,10 +8,12 @@ const play = () => {
   const numTickets = userInput.howManyTicket();
   // Ask user for the data to generate the tickets
   const ticketData = userInput.getTicketData(numTickets);
-  // Generate tickets using the `LottoTicketController` and the provided `ticketData`
-  const tickets = LottoTicketController.generateTicket(ticketData);
-  // Print the generated tickets using the `printTicket` function from `print.js`
-  print.printTicket(tickets);
+  // Generate tickets using the `LottoController` and the provided `ticketData`
+  const tickets = LottoController.generateTicket(ticketData);
+  // Generate an extraction using the `LottoController`
+  const extraction = LottoController.fakeExtraction();
+  // Print the tickets and the extraction using the `print` module
+  print.printAll(tickets, extraction);
 };
 
 play();

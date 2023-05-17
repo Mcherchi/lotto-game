@@ -1,34 +1,39 @@
+const { AsciiTable3, AlignmentEnum } = require("ascii-table3");
+
+
 /**
  * Prints an ASCII table for each ticket object in the provided array.
  *
  * @param {Array} tickets - The array of ticket objects to print.
  */
 const printTicket = (tickets) => {
-  // Clear the console before printing the tables
-  console.clear();
-
-  // Import the ascii-table module
-  const asciiTable = require("ascii-table");
-
   // Iterate through the array of ticket objects
   tickets.forEach((ticket) => {
     // Create a new ASCII table with the ticket ID as the title
-    const table = new asciiTable(`Ticket #${ticket.id}`);
-
-    // Set the column headings for the table
-    table.setHeading("Type", "City", "Numbers");
-
-    // Add a new row to the table for this ticket
-    table.addRow(
-      ticket.type.join(" - "),
-      ticket.cities.join(" - "),
-      ticket.numbers.join(" - ")
-    );
-
+    const table = new AsciiTable3(`Ticket #${ticket.id}`)
+      .setAlign(3, AlignmentEnum.CENTER)
+      .addRowMatrix([
+        ["Type", ticket.type.join(" - ")],
+        ["City", ticket.cities.join(" - ")],
+        ["Numbers", ticket.numbers.join(" - ")],
+      ]);
     // Print the table to the console
     console.log(`\n\n${table.toString()}\n`);
   });
 };
+
+const printExtraction = (extraction) =>{
+  const table = new AsciiTable3(`Extraction #${extraction._id} - ${extraction._date}`)
+    .setHeading("city", "Numbers")
+    .setAlign(3, AlignmentEnum.CENTER);
+    for(const city of extraction._cities){
+      const cityNumbers = extraction._extraction[city].join(" - ");
+      table.addRowMatrix([
+        [city, cityNumbers]
+      ]);
+    }
+    console.log(`\n\n${table.toString()}\n`);
+}
 
 /**
  * Prints the provided message to the console.
@@ -53,4 +58,10 @@ const printArray = (array) => {
   });
 };
 
-module.exports = { printTicket, printMessage, printArray };
+const printAll = (ticket, extraction) =>{
+  console.clear();
+  printExtraction(extraction);
+  printTicket(ticket);
+}
+
+module.exports = {printAll, printMessage, printArray };
