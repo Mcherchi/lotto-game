@@ -29,7 +29,7 @@ class Ticket {
   /**
    * The constructor method creates a new Ticket object.
    * @param {number[]} numbers - The number of random numbers to generate for the ticket.
-   * @param {string[]} type - The types of ticket.
+   * @param {string} type - The types of ticket.
    * @param {string[]} cities - The playable cities
    */
   constructor(numbers, type, cities) {
@@ -39,7 +39,7 @@ class Ticket {
     // The numbers property is an array of random numbers for the ticket.
     this.numbers = randomNumbers(numbers);
 
-    // The type property is an array of valid types for the ticket.
+    // The type property is a valid type for the ticket.
     this.type = type;
 
     // The cities property is an array of valid cities for the ticket.
@@ -54,7 +54,7 @@ class Ticket {
     const table = new AsciiTable3(`Ticket #${this.id}`)
       .setAlign(3, AlignmentEnum.CENTER)
       .addRowMatrix([
-        ["Type", this.type.join(" - ")], // Add "Type" row with ticket types joined by "-"
+        ["Type", this.type], // Add "Type" row with ticket type
         ["City", this.cities.join(" - ")], // Add "City" row with valid cities joined by "-"
         ["Numbers", this.numbers.join(" - ")], // Add "Numbers" row with random numbers joined by "-"
       ]);

@@ -19,8 +19,9 @@ const howManyTicket = () => {
     print.printMessage(message.howManyTicket);
     const numberOfTicket = parseInt(prompt(message.choice));
 
+    const isValidInput = Validator.checkInRange(numberOfTicket, 1, 5);
     // Check if the user input is valid
-    if (Validator.checkInRange(numberOfTicket, 1, 5)) {
+    if (isValidInput) {
       // Confirm the user's choice and return the selected quantity
       if (utils.confirmChoice(numberOfTicket)) {
         return numberOfTicket;
@@ -52,8 +53,9 @@ const howManyNumbers = () => {
     // Prompt the user to select a number of numbers
     const numbers = parseInt(prompt(message.choice));
 
+    const isValidInput = Validator.checkInRange(numbers, 1, 10);
     // Check if the user input is valid
-    if (Validator.checkInRange(numbers, 1, 10)) {
+    if (isValidInput) {
       // Confirm the user's choice and return the selected quantity
       if (utils.confirmChoice(numbers)) {
         return numbers;
@@ -66,23 +68,20 @@ const howManyNumbers = () => {
   }
 };
 
+
 /**
- * Get the type of ticket based on the number of tickets played and available types
- *
- * @param {number} numberPlayed - The number of tickets played
- * @param {array} availableTypes - The available types of tickets
- * @returns {array} - The selected types
+ * Get the type of ticket based on the quantity of numbers played and available types
+ * 
+ * @param {number} numberPlayed - The quantity of numbers played
+ * @param {array} availableTypes - The avaiable types of tickets
+ * @returns {string} - The selected type
  */
 const getType = (numberPlayed, availableTypes = [...Ticket.types]) => {
-
   console.clear();
 
-  // Initialize an empty array to store selected types
-  const selectedTypes = [];
-
-  // Use a loop to prompt the user to select ticket types until the user confirms the selection
+  // Use a loop to prompt the user to select ticket type until the user confirms the selection
   while (true) {
-    // Display message to prompt user to choose ticket types and display available types
+    // Display message to prompt user to choose ticket type and display available types
     print.printMessage(`\n${message.chooseType}`);
     availableTypes = utils.sliceArrayByLength(numberPlayed, availableTypes);
     print.printArray(availableTypes);
@@ -92,47 +91,29 @@ const getType = (numberPlayed, availableTypes = [...Ticket.types]) => {
 
     console.clear();
 
-    // Check if user input is "c"
-    if (input === "c") {
-      // If no types have been selected, display a warning message
-      if (selectedTypes.length === 0) {
-        print.printMessage(`\n\n${message.warningMessageType}`);
-        // If types have been selected, confirm the selection with the user and return the selected types if confirmed
-      } else if (utils.confirmChoice(selectedTypes.join(" - "))) {
-        return selectedTypes;
-        // If the user does not confirm the selection, reset the available types to the default and clear the selected types
-      } else {
-        availableTypes = [...Ticket.types];
-        selectedTypes.length = 0;
+    // Convert input to an index
+    const index = parseInt(input) - 1;
+
+    // Check if the index is within the range of available types
+    const isValidInput = Validator.checkInRange(
+      index,
+      0,
+      availableTypes.length - 1
+    );
+
+    if (isValidInput) {
+      // Get the chosen type based on the index
+      const chosenType = availableTypes[index];
+
+      // Confirm the chosen type with the user
+      if (utils.confirmChoice(chosenType)) {
+        return chosenType;
       }
-      // If user input is not "c", try to select the ticket type based on the input
     } else {
-      // Convert input to an index
-      const index = parseInt(input) - 1;
-
-      // Check if the index is within the range of available types
-      const isValidInput = Validator.checkInRange(
-        index,
-        0,
-        availableTypes.length - 1
-      );
-
-      // If the index is not valid, display an error message
-      if (!isValidInput) {
-        print.printMessage(message.error);
-        // If the index is valid, select the ticket type, add it to the selected types array and remove the selected type from the available types
-      } else {
-        const selectedType = availableTypes[index];
-        availableTypes.splice(index, 1);
-        selectedTypes.push(selectedType);
-
-        // Display a message indicating the selected type
-        print.printMessage(`\n\n${message.youHaveChosen}`);
-        print.printArray(selectedTypes);
-      }
+      print.printMessage(message.error);
     }
   }
-};
+}
 
 /**
  * Get the list of cities based on available cities
