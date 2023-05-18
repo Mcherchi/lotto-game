@@ -1,39 +1,15 @@
-const { AsciiTable3, AlignmentEnum } = require("ascii-table3");
-
 
 /**
  * Prints an ASCII table for each ticket object in the provided array.
  *
  * @param {Array} tickets - The array of ticket objects to print.
  */
-const printTicket = (tickets) => {
+const printTickets = (tickets) => {
   // Iterate through the array of ticket objects
   tickets.forEach((ticket) => {
-    // Create a new ASCII table with the ticket ID as the title
-    const table = new AsciiTable3(`Ticket #${ticket.id}`)
-      .setAlign(3, AlignmentEnum.CENTER)
-      .addRowMatrix([
-        ["Type", ticket.type.join(" - ")],
-        ["City", ticket.cities.join(" - ")],
-        ["Numbers", ticket.numbers.join(" - ")],
-      ]);
-    // Print the table to the console
-    console.log(`\n\n${table.toString()}\n`);
+    ticket.printTicket();
   });
 };
-
-const printExtraction = (extraction) =>{
-  const table = new AsciiTable3(`Extraction #${extraction._id} - ${extraction._date}`)
-    .setHeading("city", "Numbers")
-    .setAlign(3, AlignmentEnum.CENTER);
-    for(const city of extraction._cities){
-      const cityNumbers = extraction._extraction[city].join(" - ");
-      table.addRowMatrix([
-        [city, cityNumbers]
-      ]);
-    }
-    console.log(`\n\n${table.toString()}\n`);
-}
 
 /**
  * Prints the provided message to the console.
@@ -60,8 +36,8 @@ const printArray = (array) => {
 
 const printAll = (ticket, extraction) =>{
   console.clear();
-  printExtraction(extraction);
-  printTicket(ticket);
+  extraction.printExtraction();
+  printTickets(ticket);
 }
 
 module.exports = {printAll, printMessage, printArray };
