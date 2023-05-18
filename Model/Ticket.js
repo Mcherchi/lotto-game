@@ -1,10 +1,11 @@
-const utils = require("../Controller/utils");
+const { AsciiTable3, AlignmentEnum } = require("ascii-table3");
+const { randomNumbers } = require("../Controller/utils");
 
 /**
  * The Ticket class represents a lottery ticket.
  */
 class Ticket {
-  // The idCounter property keeps track of the number of Ticket objects created.
+  // Static counter to track the number of Ticket objects created.
   static idCounter = 0;
 
   // The cities property is an array of valid cities for the ticket.
@@ -36,13 +37,29 @@ class Ticket {
     this.id = ++Ticket.idCounter;
 
     // The numbers property is an array of random numbers for the ticket.
-    this.numbers = utils.randomNumbers(numbers);
+    this.numbers = randomNumbers(numbers);
 
     // The type property is an array of valid types for the ticket.
     this.type = type;
 
     // The cities property is an array of valid cities for the ticket.
     this.cities = cities;
+  }
+
+  /**
+   * This method prints the ticket information to the console using an ASCII table
+   */
+  printTicket() {
+    // Create a new ASCII table with the ticket ID as the title
+    const table = new AsciiTable3(`Ticket #${this.id}`)
+      .setAlign(3, AlignmentEnum.CENTER)
+      .addRowMatrix([
+        ["Type", this.type.join(" - ")], // Add "Type" row with ticket types joined by "-"
+        ["City", this.cities.join(" - ")], // Add "City" row with valid cities joined by "-"
+        ["Numbers", this.numbers.join(" - ")], // Add "Numbers" row with random numbers joined by "-"
+      ]);
+    // Print the table to the console
+    console.log(`\n\n${table.toString()}\n`);
   }
 }
 
