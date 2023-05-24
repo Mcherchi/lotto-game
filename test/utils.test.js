@@ -4,7 +4,6 @@ const {
   sliceArrayByLength,
 } = require("../Controller/utils");
 
-
 describe("randomNumbers", () => {
   test("Should generate the specified quantity of random numbers", () => {
     const quantityOfNumbers = 5;
@@ -34,4 +33,19 @@ describe("randomNumbers", () => {
   });
 });
 
+describe("sliceArrayByLength", () => {
+  test("Should return a new array with the specified length", () => {
+    const input = 3;
+    const array = [1, 2, 3, 4, 5];
+    const result = sliceArrayByLength(input, array);
+    expect(result).toHaveLength(input);
+    expect(result).toEqual([1, 2, 3]);
+  });
 
+  test("Should return the original array if the input is not between 1 and 4", () => {
+    const input = 5;
+    const array = [1, 2, 3, 4, 5];
+    const result = sliceArrayByLength(input, array);
+    expect(result).toEqual(array);
+  });
+});
