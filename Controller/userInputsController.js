@@ -26,10 +26,7 @@ const howManyTicket = () => {
       if (utils.confirmChoice(numberOfTicket)) {
         return numberOfTicket;
       }
-    } else if (numberOfTicket === 0) {
-        // Print a goodbye message and return
-        print.printMessage(message.goodbye);
-        return;
+
     } else {
         console.clear();
         // Print an error message and prompt the user again
@@ -110,6 +107,7 @@ const getType = (numberPlayed, availableTypes = [...Ticket.types]) => {
         return chosenType;
       }
     } else {
+      console.clear();
       print.printMessage(message.error);
     }
   }

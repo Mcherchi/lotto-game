@@ -3,7 +3,7 @@ const messages = {
   welcome: "Welcome to the Lotto Game!",
   goodbye: "Goodbye!",
   howManyTicket:
-    "How many tickets do you want to generate? (min: 1 - max: 5, 0: exit)",
+    "How many tickets do you want to generate? (min: 1 - max: 5)",
   howManyNumbers:
     "How many numbers do you want to generate? (min: 1 - max: 10)",
   error: "Invalid Input!",
