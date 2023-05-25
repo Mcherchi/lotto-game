@@ -2,6 +2,7 @@ const prompt = require("prompt-sync")();
 const print = require("../View/print");
 const message = require("../View/messages");
 const utils = require("./utils");
+const { randomNumbers } = require("../Controller/utils");
 const { Validator } = require("../Model/Validator");
 const { Ticket } = require("../Model/Ticket");
 
@@ -26,11 +27,10 @@ const howManyTicket = () => {
       if (utils.confirmChoice(numberOfTicket)) {
         return numberOfTicket;
       }
-
     } else {
-        console.clear();
-        // Print an error message and prompt the user again
-        print.printMessage(message.error);
+      console.clear();
+      // Print an error message and prompt the user again
+      print.printMessage(message.error);
     }
   }
 };
@@ -65,10 +65,9 @@ const howManyNumbers = () => {
   }
 };
 
-
 /**
  * Get the type of ticket based on the quantity of numbers played and available types
- * 
+ *
  * @param {number} numberPlayed - The quantity of numbers played
  * @param {array} availableTypes - The avaiable types of tickets
  * @returns {string} - The selected type
@@ -111,7 +110,7 @@ const getType = (numberPlayed, availableTypes = [...Ticket.types]) => {
       print.printMessage(message.error);
     }
   }
-}
+};
 
 /**
  * Get the list of cities based on available cities
@@ -120,7 +119,6 @@ const getType = (numberPlayed, availableTypes = [...Ticket.types]) => {
  * @returns {array} - The selected cities
  */
 const getCities = (availableCties = [...Ticket.cities]) => {
-
   console.clear();
 
   // Initialize an empty array to store selected cities
@@ -201,7 +199,9 @@ const getTicketData = (numberOfTickets) => {
   const ticketData = [];
 
   for (let i = 0; i < numberOfTickets; i++) {
-    const numbers = howManyNumbers();
+    const quantityOfNumbers = howManyNumbers();
+
+    const numbers = randomNumbers(quantityOfNumbers);
 
     const types = getType(numbers);
 
@@ -212,6 +212,7 @@ const getTicketData = (numberOfTickets) => {
   }
 
   // Return the array of ticket data.
+  console.log(ticketData)
   return ticketData;
 };
 

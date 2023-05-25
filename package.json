@@ -4,12 +4,16 @@
   "description": "This project simulates the game of lotto.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "coverage": "jest --coverage"
   },
   "author": "Mattia Cherchi",
   "license": "ISC",
   "dependencies": {
     "ascii-table3": "^0.8.2",
     "prompt-sync": "^4.2.0"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0"
   }
 }

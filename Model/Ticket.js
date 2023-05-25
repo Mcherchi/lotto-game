@@ -1,5 +1,4 @@
 const { AsciiTable3, AlignmentEnum } = require("ascii-table3");
-const { randomNumbers } = require("../Controller/utils");
 
 /**
  * The Ticket class represents a lottery ticket.
@@ -46,7 +45,7 @@ class Ticket {
     this._id = ++Ticket.idCounter;
 
     // The numbers property is an array of random numbers for the ticket.
-    this._numbers = randomNumbers(numbers);
+    this._numbers = numbers
 
     // The type property is a valid type for the ticket.
     this._type = type;
@@ -123,7 +122,7 @@ class Ticket {
 
     // If the ticket is winning, create a new ASCII table with the title "Ticket# {id}: Winning"
     if (isWinning) {
-      const table = new AsciiTable3(`Ticket#${this._id}: Winning`)
+      const table = new AsciiTable3(`Ticket #${this._id}: Winning`)
 
         // Set the alignment of the columns to center
         .setAlign(3, AlignmentEnum.CENTER)
