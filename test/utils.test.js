@@ -1,3 +1,6 @@
+const print = require("../View/print");
+const message = require("../View/messages");
+let prompt = require("prompt-sync")();
 const {
   randomNumbers,
   confirmChoice,
@@ -49,3 +52,4 @@ describe("sliceArrayByLength", () => {
     expect(result).toEqual(array);
   });
 });
+
