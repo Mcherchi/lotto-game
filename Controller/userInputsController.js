@@ -212,6 +212,7 @@ const getTicketData = (numberOfTickets) => {
   }
 
   // Return the array of ticket data.
+  console.log(ticketData)
   return ticketData;
 };
 

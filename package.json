@@ -4,7 +4,8 @@
   "description": "This project simulates the game of lotto.",
   "main": "app.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "coverage": "jest --coverage"
   },
   "author": "Mattia Cherchi",
   "license": "ISC",
