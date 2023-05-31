@@ -188,6 +188,38 @@ const getCities = (availableCties = [...Ticket.cities]) => {
   }
 };
 
+
+/**
+ * Retrieves the bet amount from the user.
+ * @returns {number} - The selected bet amount.
+ */
+const getBet = () => {
+  console.clear();
+
+  while (true) {
+    // Print a message to prompt the user to enter the bet amount
+    print.printMessage(`\n${message.amount}\n`);
+
+    // Prompt the user to enter the bet amount
+    const bet = parseInt(prompt(message.choice));
+    
+    // Check if the user input is a valid number within the range of 1 to 200
+    const isValidInput = Validator.checkInRange(bet, 1, 200);
+
+    if (isValidInput) {
+      // Confirm the user's choice and return the selected bet
+      if (utils.confirmChoice(bet)) {
+        return bet;
+      }
+    } else {
+      // Print an error message and prompt the user again
+      console.clear();
+      print.printMessage(message.error);
+    }
+  }
+};
+
+
 /**
  * Generate ticket data for a given number of tickets.
  *
@@ -203,16 +235,18 @@ const getTicketData = (numberOfTickets) => {
 
     const numbers = randomNumbers(quantityOfNumbers);
 
-    const types = getType(numbers);
+    const types = getType(quantityOfNumbers);
+
+    const bet = getBet();
 
     const cities = getCities();
 
     // Add the ticket data to the array.
-    ticketData.push([numbers, types, cities]);
+    ticketData.push([numbers, types, cities, bet]);
   }
 
   // Return the array of ticket data.
-  console.log(ticketData)
+  console.log(ticketData);
   return ticketData;
 };
 

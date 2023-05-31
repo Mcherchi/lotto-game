@@ -58,7 +58,7 @@ const printArray = (array) => {
  */
 const printAll = (ticket, extraction) => {
   // Clear the console before printing the information
-  // console.clear();
+  console.clear();
 
   // Print the details of the lottery ticket using the printTickets() function
   printTickets(ticket);
