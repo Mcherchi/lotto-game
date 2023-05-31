@@ -34,18 +34,28 @@ class Ticket {
     Cinquina: 5,
   };
 
+  // The typeMaxWinning property is an object that maps the ticket type to the maximum winning amount.
+  _typeMaxWinning = {
+    Estratto: 11.23,
+    Ambo: 250,
+    Terno: 4500,
+    Quaterna: 120000,
+    Cinquina: 6000000,
+  };
+
   /**
    * The constructor method creates a new Ticket object.
    * @param {number[]} numbers - The number of random numbers to generate for the ticket.
    * @param {string} type - The types of ticket.
    * @param {string[]} cities - The playable cities
+   * @param {number} bet -
    */
-  constructor(numbers, type, cities) {
+  constructor(numbers, type, cities, bet) {
     // The id property is a unique identifier for the ticket.
     this._id = ++Ticket.idCounter;
 
     // The numbers property is an array of random numbers for the ticket.
-    this._numbers = numbers
+    this._numbers = numbers;
 
     // The type property is a valid type for the ticket.
     this._type = type;
@@ -55,6 +65,9 @@ class Ticket {
 
     // The winningDetails property is an array of objects that contains the winning details.
     this._winningDetails = [];
+
+    // The bet property is the amount of money bet on the ticket.
+    this._bet = bet;
   }
 
   /**
@@ -68,6 +81,7 @@ class Ticket {
         ["Type", this._type], // Add "Type" row with ticket type
         ["City", this._cities.join(" - ")], // Add "City" row with valid cities joined by "-"
         ["Numbers", this._numbers.join(" - ")], // Add "Numbers" row with random numbers joined by "-"
+        ["Bet", `€${this._bet}`], // Add "Bet" row with bet amount
       ]);
     // Print the table to the console
     console.log(`\n\n${table.toString()}\n`);
@@ -125,15 +139,19 @@ class Ticket {
       const table = new AsciiTable3(`Ticket #${this._id}: Winning`)
 
         // Set the alignment of the columns to center
-        .setAlign(3, AlignmentEnum.CENTER)
-
-        // Add a row to the table with the label "Type" and the value of the ticket type
-        .addRowMatrix([["Type", this._type]]);
+        .setAlign(3, AlignmentEnum.CENTER);
 
       // Iterate through each winning detail and add a row to the table with the city and winning numbers
       this._winningDetails.forEach((detail) => {
         table.addRow(detail.city, detail.winningNumbers.join(" - "));
       });
+
+      // Add a row to the table with the type and gross winning
+      table.addRowMatrix([
+        ["Type", this._type],
+        ["gross Winnind", `€ ${this.#calculateGrossWinning()}`],
+        ["net Winnind", `€ ${this.#calculateNetWinning()}`],
+      ]);
 
       // Print the table to the console
       console.log(`\n\n${table.toString()}\n`);
@@ -142,6 +160,33 @@ class Ticket {
     else {
       console.log(`Ticket #${this._id} Not winning`);
     }
+  }
+
+  /**
+   * Calculate the gross winning ammount.
+   * @returns {number} - The gross winning amount rounded to two decimal places.
+   */
+  #calculateGrossWinning() {
+    // Calculate the divisor as the length of the _cities array if 'Tutte' is not included, otherwise 10.
+    const divisor = this._cities.includes("Tutte") ? 10 : this._cities.length;
+
+    // Calculate the multiplier as the ratio of the maximum winning amount for the ticket type and the length of the _numbers array.
+    const multiplier = this._typeMaxWinning[this._type] / this._numbers.length;
+
+    // Calculate the gross winning amount as the product of the multiplier and the bet amount divided by the divisor.
+    return ((multiplier * this._bet) / divisor).toFixed(2);
+  }
+
+  /**
+   * Calculates the net winning amount.
+   * @returns {number} - The net winning amount rounded to two decimal places.
+   */
+  #calculateNetWinning() {
+    const divisor = this._cities.includes("Tutte") ? 10 : this._cities.length;
+    const multiplier = this._typeMaxWinning[this._type] / this._numbers.length;
+
+    // Calculate the net winning amount by multiplying the multiplier, bet amount (_bet), subtracting 8%, and dividing by the divisor.
+    return ((multiplier * this._bet * (1 - 0.08)) / divisor).toFixed(2);
   }
 }
 

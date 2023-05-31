@@ -30,6 +30,7 @@ const confirmChoice = (choice) => {
     } else if (confirmation === "N") {
       return false;
     } else {
+      console.clear()
       print.printMessage(`\n\n${message.warningConfirmCoiche}`);
     }
   }
