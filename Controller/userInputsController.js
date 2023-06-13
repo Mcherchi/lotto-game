@@ -12,24 +12,20 @@ const { Ticket } = require("../Model/Ticket");
  * @returns {number} - The number of tickets selected by the user.
  */
 const howManyTicket = () => {
-  // Print a welcome message to the console
   print.printMessage(`\n${message.welcome}!\n`);
 
   while (true) {
-    // Prompt the user to select a number of tickets
     print.printMessage(message.howManyTicket);
-    const numberOfTicket = parseInt(prompt(message.choice));
 
-    const isValidInput = Validator.checkInRange(numberOfTicket, 1, 5);
-    // Check if the user input is valid
+    const input = parseInt(prompt(message.choice));
+    const isValidInput = Validator.checkInRange(input, 1, 5);
+
     if (isValidInput) {
-      // Confirm the user's choice and return the selected quantity
-      if (utils.confirmChoice(numberOfTicket)) {
-        return numberOfTicket;
+      if (utils.confirmChoice(input)) {
+        return input;
       }
     } else {
       console.clear();
-      // Print an error message and prompt the user again
       print.printMessage(message.error);
     }
   }
@@ -44,21 +40,17 @@ const howManyNumbers = () => {
   console.clear();
 
   while (true) {
-    // Print a message to prompt the user
     print.printMessage(`\n${message.howManyNumbers}\n`);
 
     // Prompt the user to select a number of numbers
-    const numbers = parseInt(prompt(message.choice));
+    const input = parseInt(prompt(message.choice));
 
-    const isValidInput = Validator.checkInRange(numbers, 1, 10);
-    // Check if the user input is valid
+    const isValidInput = Validator.checkInRange(input, 1, 10);
     if (isValidInput) {
-      // Confirm the user's choice and return the selected quantity
-      if (utils.confirmChoice(numbers)) {
-        return numbers;
+      if (utils.confirmChoice(input)) {
+        return input;
       }
     } else {
-      // Print an error message and prompt the user again
       console.clear();
       print.printMessage(message.error);
     }
@@ -75,14 +67,12 @@ const howManyNumbers = () => {
 const getType = (numberPlayed, availableTypes = [...Ticket.types]) => {
   console.clear();
 
-  // Use a loop to prompt the user to select ticket type until the user confirms the selection
   while (true) {
     // Display message to prompt user to choose ticket type and display available types
     print.printMessage(`\n${message.chooseType}`);
     availableTypes = utils.sliceArrayByLength(numberPlayed, availableTypes);
     print.printArray(availableTypes);
 
-    // Prompt user for input and convert to lowercase
     const input = prompt(message.choice).toLowerCase();
 
     console.clear();
@@ -121,19 +111,14 @@ const getType = (numberPlayed, availableTypes = [...Ticket.types]) => {
 const getCities = (availableCties = [...Ticket.cities]) => {
   console.clear();
 
-  // Initialize an empty array to store selected cities
   const selectedCities = [];
 
-  // Use a loop to prompt user to select cities until the user confirms their selection
   while (true) {
-    // Display message to prompt user to choose cities and display available cities
     print.printMessage(`\n${message.chooseCity}`);
     print.printArray(availableCties);
 
-    // Prompt user for input and convert to lowercase
     const input = prompt(message.choice).toLowerCase();
 
-    // Clear the console
     console.clear();
 
     // Check if user input is "c"
@@ -151,10 +136,8 @@ const getCities = (availableCties = [...Ticket.cities]) => {
       }
       // If user input is not "c", try to select the city based on the input
     } else {
-      // Convert input to an index
       const index = parseInt(input) - 1;
 
-      // Check if the index is within the range of available cities
       const isValidInput = Validator.checkInRange(
         index,
         0,
@@ -178,16 +161,14 @@ const getCities = (availableCties = [...Ticket.cities]) => {
           availableCties = [];
         }
 
-        // Add the selected city to the selected cities array
         selectedCities.push(chosenCity);
-        // Display a message indicating the selected city
+
         print.printMessage(`\n\n${message.youHaveChosen}`);
         print.printArray(selectedCities);
       }
     }
   }
 };
-
 
 /**
  * Retrieves the bet amount from the user.
@@ -197,28 +178,22 @@ const getBet = () => {
   console.clear();
 
   while (true) {
-    // Print a message to prompt the user to enter the bet amount
     print.printMessage(`\n${message.amount}\n`);
 
-    // Prompt the user to enter the bet amount
-    const bet = parseInt(prompt(message.choice));
-    
-    // Check if the user input is a valid number within the range of 1 to 200
-    const isValidInput = Validator.checkInRange(bet, 1, 200);
+    const input = parseInt(prompt(message.choice));
+
+    const isValidInput = Validator.checkInRange(input, 1, 200);
 
     if (isValidInput) {
-      // Confirm the user's choice and return the selected bet
-      if (utils.confirmChoice(bet)) {
-        return bet;
+      if (utils.confirmChoice(input)) {
+        return input;
       }
     } else {
-      // Print an error message and prompt the user again
       console.clear();
       print.printMessage(message.error);
     }
   }
 };
-
 
 /**
  * Generate ticket data for a given number of tickets.
@@ -245,7 +220,6 @@ const getTicketData = (numberOfTickets) => {
     ticketData.push([numbers, types, cities, bet]);
   }
 
-  // Return the array of ticket data.
   console.log(ticketData);
   return ticketData;
 };
