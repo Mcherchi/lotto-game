@@ -114,8 +114,8 @@ class Ticket {
     // Check if there are any winning details in the winningDetails array
     if (this._winningDetails.length > 0) {
       this._isWinning = true;
-      this._grossWinning = this.#calculateGrossWinning();
-      this._netWinning = this.#calculateNetWinning();
+      this._grossWinning = this._calculateGrossWinning();
+      this._netWinning = this._calculateNetWinning();
     }
   }
 
@@ -123,7 +123,7 @@ class Ticket {
    * Calculate the gross winning ammount.
    * @returns {number} - The gross winning amount rounded to two decimal places.
    */
-  #calculateGrossWinning() {
+  _calculateGrossWinning() {
     // Calculate the divisor as the length of the _cities array if 'Tutte' is not included, otherwise 10.
     const divisor = this._cities.includes("Tutte") ? 10 : this._cities.length;
 
@@ -137,7 +137,7 @@ class Ticket {
    * Calculates the net winning amount.
    * @returns {number} - The net winning amount rounded to two decimal places.
    */
-  #calculateNetWinning() {
+  _calculateNetWinning() {
     const netWinning = this._grossWinning - this._grossWinning * 0.08;
     return netWinning.toFixed(2);
   }
@@ -159,8 +159,8 @@ class Ticket {
 
       table.addRowMatrix([
         ["Type", this._type],
-        ["gross Winnind", `€ ${this._grossWinning}`],
-        ["net Winnind", `€ ${this._netWinning}`],
+        ["gross Winning", `€ ${this._grossWinning}`],
+        ["net Winning", `€ ${this._netWinning}`],
       ]);
 
       console.log(`\n\n${table.toString()}\n`);
