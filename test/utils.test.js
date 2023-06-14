@@ -1,8 +1,4 @@
-
-const {
-  randomNumbers,
-  sliceArrayByLength,
-} = require("../Controller/utils");
+const { randomNumbers, sliceArrayByLength } = require("../Controller/utils");
 
 describe("randomNumbers", () => {
   test("Should generate the specified quantity of random numbers", () => {
@@ -49,4 +45,3 @@ describe("sliceArrayByLength", () => {
     expect(result).toEqual(array);
   });
 });
-
