@@ -12,6 +12,9 @@ const play = () => {
   const tickets = LottoController.generateTicket(ticketData);
   // Generate an extraction using the `LottoController`
   const extraction = LottoController.fakeExtraction();
+  // Check if the tickets have won using the `LottoController`
+  LottoController.checkWinningTickets(tickets, extraction);
+
   // Print the tickets and the extraction using the `print` module
   print.printAll(tickets, extraction);
 };

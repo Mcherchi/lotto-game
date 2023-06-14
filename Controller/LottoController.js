@@ -18,10 +18,24 @@ class LottoController {
     return tickets;
   }
 
-  static fakeExtraction(){
+  /**
+   * Generates a fake extraction.
+   * @returns {Extraction} - An instance of the Extraction class.
+   */
+  static fakeExtraction() {
     return new Extraction();
   }
 
+  /**
+   * Checks if tickets have won based on the provided extraction.
+   * @param {Ticket[]} tickets - An array of Ticket objects.
+   * @param {Extraction} extraction - An instance of the Extraction class.
+   */
+  static checkWinningTickets(tickets, extraction) {
+    tickets.forEach((ticket) => {
+      ticket.checkWinning(extraction);
+    });
+  }
 }
 
 module.exports = { LottoController };
