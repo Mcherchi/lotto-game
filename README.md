@@ -1,6 +1,6 @@
 # lotto-game
 
-This project is a simulation of the popular Lotto game implemented in Node.js.
+This project is a simulation of the popular Lotto game.
 
 The game follows the official rules of Lotto, which can be found [here](https://www.sisal.it/lotto/come-si-gioca).
 
