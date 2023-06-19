@@ -48,7 +48,6 @@ Welcome to the Lotto Game!!
 How many tickets do you want to generate? (min: 1 - max: 5)
 Enter you choice:
 
->
 ```
 
 2. **Ticket Numbers**: Enter the numbers for each ticket. The numbers will be randomly generated between 1 and 90, and each ticket must contain 10 unique numbers.
@@ -58,7 +57,6 @@ How many numbers do you want to generate? (min: 1 - max: 10)
 
 Enter you choice:
 
->
 ```
 
 3. **Type of bet**: Select the type of bet from the following options: "Estratto", "Ambo", "Terno", "Quaterna", "Cinquina". The type of bet is determined by the amount of numbers played.
@@ -72,7 +70,6 @@ Choose a type:
 5) Cinquina
 Enter you choice:
 
->
 ```
 
 4. **Amount of money**: Enter the amount of money to bet on the selected type of bet. The amount must be between 1 and 200.
@@ -82,7 +79,6 @@ Indicates the amount of bet (min: €1 - max €200)
 
 Enter you choice:
 
->
 ```
 
 **Cities Selection**: Select the cities on which you want to place your bets. You can choose to bet on all available cities.
@@ -102,7 +98,6 @@ Choose a city:
 11) Tutte
 Enter you choice:
 
->
 ```
 
 5. Ticket Generation: The game generates the specified number of tickets, each containing randomly generated numbers, selected cities, and the chosen bet amount.
@@ -130,7 +125,6 @@ Enter you choice:
 +---------+------------------------------------------------+
 
 
->
 ```
 
 6. **Extraction**: The game generates a random extraction of 5 numbers between 1 and 90.
@@ -153,7 +147,6 @@ Enter you choice:
 | Venezia  | 21 - 22 - 52 - 53 - 66 |
 +----------+------------------------+
 
->
 ```
 
 7. **Winnings**: The game calculates the winnings for each ticket based on the type of bet, the amount of money and the number of matching numbers. Finally, it prints the details of the win
@@ -181,5 +174,4 @@ You played 2 tickets, details on winnings are below
 
 Ticket #2 Not winning
 
->
 ```
