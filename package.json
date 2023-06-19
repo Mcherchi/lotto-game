@@ -4,6 +4,7 @@
   "description": "This project simulates the game of lotto.",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "jest",
     "coverage": "jest --coverage"
   },
