@@ -60,4 +60,10 @@ const printAll = (ticket, extraction) => {
   printWinningDetails(ticket);
 };
 
-module.exports = { printAll, printMessage, printArray };
+module.exports = {
+  printTickets,
+  printWinningDetails,
+  printMessage,
+  printArray,
+  printAll,
+};

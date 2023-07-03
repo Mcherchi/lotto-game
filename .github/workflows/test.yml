@@ -24,7 +24,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests
-        run: npm test
+      - name: Run tests with coverage
+        run: npm test -- --coverage
 
-
+      - name: Check coverage
+        run: |
+          npx jest --coverage --coverageThreshold='{"global":{"statements":85,"branches":75,"functions":85,"lines":85}}'
