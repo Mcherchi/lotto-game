@@ -29,5 +29,4 @@ jobs:
 
       - name: Check coverage
         run: |
-          npm install -g coverage-percentage
-          coverage-percentage -t 85
+          npx jest --coverage --coverageThreshold='{"global":{"statements":85,"branches":75,"functions":85,"lines":85}}'
