@@ -24,7 +24,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests
-        run: npm test
+      - name: Run tests with coverage
+        run: npm test -- --coverage
 
-
+      - name: Check coverage
+        run: |
+          npm install -g coverage-percentage
+          coverage-percentage -t 85

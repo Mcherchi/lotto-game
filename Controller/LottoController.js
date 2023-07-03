@@ -10,7 +10,7 @@ class LottoController {
    * @param {Array} ticketData - Lottery ticket data.
    * @returns {Array} - Array of Ticket objects.
    */
-  static generateTicket(ticketData) {
+  static generateTickets(ticketData) {
     const tickets = [];
     ticketData.forEach((element) => {
       tickets.push(new Ticket(...element));

@@ -9,7 +9,7 @@ const play = () => {
   // Ask user for the data to generate the tickets
   const ticketData = userInput.getTicketData(numTickets);
   // Generate tickets using the `LottoController` and the provided `ticketData`
-  const tickets = LottoController.generateTicket(ticketData);
+  const tickets = LottoController.generateTickets(ticketData);
   // Generate an extraction using the `LottoController`
   const extraction = LottoController.fakeExtraction();
   // Check if the tickets have won using the `LottoController`
