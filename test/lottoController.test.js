@@ -3,14 +3,14 @@ const { Ticket } = require("../Model/Ticket");
 const { Extraction } = require("../Model/Extraction");
 
 describe("LottoController", () => {
-  describe("generateTicket", () => {
+  describe("generateTickets", () => {
     test("Should generate an array of Ticket objects based on the ticketData", () => {
       const ticketData = [
         [[1, 2, 3], "Ambo", ["Bari", "Roma"], 5],
         [[4, 5, 6], "Terno", ["Milano"], 10],
       ];
 
-      const tickets = LottoController.generateTicket(ticketData);
+      const tickets = LottoController.generateTickets(ticketData);
 
       expect(tickets).toHaveLength(2);
       expect(tickets[0]).toBeInstanceOf(Ticket);
